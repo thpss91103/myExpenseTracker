@@ -14,13 +14,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      amount: {
+      icon: {
         allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      date: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       created_at: {
         allowNull: false,

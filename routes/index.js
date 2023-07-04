@@ -19,6 +19,7 @@ router.post(
 router.get('/logout', userController.logout)
 
 router.get('/accounts', authenticated, userController.accounts)
+router.post('/accounts', authenticated, userController.createAccount)
 
 router.get('/', (req, res) => res.redirect('/accounts'))
 router.use('/', generalErrorHandler)

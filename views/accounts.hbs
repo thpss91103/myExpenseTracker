@@ -1,6 +1,7 @@
 <div class="row m-4">
   <div class="col-md-6 m-auto">
-    <button class="mb-1 border border-2 border-info rounded-circle text-info text-info-emphasis bg-white">＋</button>
+    <button class="mb-1 border border-2 border-info rounded-circle text-info text-info-emphasis bg-white"
+      data-bs-toggle="modal" data-bs-target="#createAccountModal">＋</button>
     <div class="card card-body user-card">
       <h1 class="text-center mt-3">帳戶總覽</h1>
       {{#if accounts}}
@@ -23,3 +24,4 @@
   </div>
 </div>
 {{> edit-modal}}
+{{> createAccountModal}}

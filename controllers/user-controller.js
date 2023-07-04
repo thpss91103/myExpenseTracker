@@ -64,6 +64,17 @@ const userController = {
     req.flash('success_messages', '登出成功！')
     req.logout()
     return res.redirect('/signin')
+  },
+  createAccount: async (req, res, next) => {
+    try {
+      const userId = helpers.getUser(req).id
+      const { name, date } = req.body
+      console.log(userId)
+      await Account.create({ name, date, UserId: userId })
+      return res.redirect('/accounts')
+    } catch (err) {
+      next(err)
+    }
   }
 }
 

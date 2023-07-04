@@ -42,6 +42,18 @@ const userController = {
     } catch (err) {
       next(err)
     }
+  },
+  signIn: (req, res, next) => {
+    req.flash('success_messages', '成功登入！')
+    return res.redirect('/accounts')
+  },
+  accounts: (req, res) => {
+    return res.render('accounts')
+  },
+  logout: (req, res) => {
+    req.flash('success_messages', '登出成功！')
+    req.logout()
+    return res.redirect('/signin')
   }
 }
 

@@ -1,18 +1,16 @@
 <header>
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark px-4">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">信用卡帳本</a>
       {{#if user}}
+      <a class="navbar-brand" href="/accounts">{{ user.name }} 信用卡帳本</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-          <li class="nav-item d-inline-flex align-items-center">
-            <span class="text-white nav-link">Hi, {{ user.email }}</span>
-          </li>
           <li class="nav-item">
+            <a href="/accounts"><button class="btn btn-outline-light my-sm-0 my-2">Accounts</button></a>
             <a href="/users/{{ user.id }}"><button class="btn btn-outline-light my-sm-0 my-2">Profile</button></a>
             <a href="/logout"><button class="btn btn-outline-success my-sm-0 my-2">Logout</button></a>
           </li>

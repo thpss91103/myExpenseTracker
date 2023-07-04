@@ -1,1 +1,25 @@
-<h1>welcome</h1>
+<div class="row m-4">
+  <div class="col-md-6 m-auto">
+    <button class="mb-1 border border-2 border-info rounded-circle text-info text-info-emphasis bg-white">＋</button>
+    <div class="card card-body user-card">
+      <h1 class="text-center mt-3">帳戶總覽</h1>
+      {{#if accounts}}
+        {{#each accounts}}
+          <div class="mt-2 d-flex">
+            <h4>{{ this.name }}</h4>
+            <p class="ms-5 mt-1 text-secondary">結帳日期：{{ this.date }}</p>
+            <div class="col text-end">
+              <button class='btn btn-success btn-edit' data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{this.id}}" data-name="{{this.name}}" data-date="{{this.date}}">編輯</button>
+              <form action="/accounts/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+                <button class="btn btn-danger" type="submit" onclick="return confirm(`確定要刪除此帳戶嗎？`)">刪除</button>
+              </form>
+            </div>
+          </div>
+        {{/each}}
+      {{else}}
+      <p class="text-center mt-3">目前尚無帳戶</p>
+      {{/if}}
+    </div>
+  </div>
+</div>
+{{> edit-modal}}

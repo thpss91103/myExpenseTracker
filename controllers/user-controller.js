@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const { User } = require('../models')
+const { User, Account } = require('../models')
 const helpers = require('../_helpers')
 
 const userController = {
@@ -47,8 +47,18 @@ const userController = {
     req.flash('success_messages', '成功登入！')
     return res.redirect('/accounts')
   },
-  accounts: (req, res) => {
-    return res.render('accounts')
+  accounts: async (req, res, next) => {
+    try {
+      const userId = helpers.getUser(req).id
+      const accounts = await Account.findAll({ 
+        raw: true,
+        where: { User_id: userId } 
+      })
+
+      return res.render('accounts', {accounts})
+    } catch(err) {
+      next(err)
+    }
   },
   logout: (req, res) => {
     req.flash('success_messages', '登出成功！')

@@ -69,8 +69,40 @@ const userController = {
     try {
       const userId = helpers.getUser(req).id
       const { name, date } = req.body
-      console.log(userId)
       await Account.create({ name, date, UserId: userId })
+      return res.redirect('/accounts')
+    } catch (err) {
+      next(err)
+    }
+  },
+  editAccount: async (req, res, next) => {
+    try {
+      const accountId = req.params.id
+      const { name, date} = req.body
+
+      const account = await Account.findByPk(accountId)
+
+      if(!account) { throw new Error('沒有此帳戶')}
+
+      await account.update({
+        name: name || account.name,
+        date: date || account.date
+      })
+
+      req.flash('success_messages', '已更新成功！')
+      return res.redirect('/accounts')
+    } catch(err) {
+      next(err)
+    }
+  },
+  deleteAccount: async (req, res, next) => {
+    try {
+      const accountId = req.params.id
+      const account = await Account.findByPk(accountId)
+
+      if (!account) { throw new Error('沒有此帳戶') }
+
+      await account.destroy()
       return res.redirect('/accounts')
     } catch (err) {
       next(err)

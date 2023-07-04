@@ -9,7 +9,7 @@ btnEdit.forEach(btn => {
     const { id, name, date } = btn.dataset
     editModal.innerHTML = `<div class='modal-dialog'>
     <div class='user-edit modal-content'>
-      <form action='/accounts/${{id}}?_method=PUT' method='POST' enctype='multipart/form-data'>
+      <form action='/accounts/${id}/edit' method='POST'>
         <div class='d-flex justify-content-between m-2'>
           <div class='edit-page-title d-flex align-items-center'>
             <button type='button' class='border border-0 bg-white' data-bs-dismiss='modal' aria-label='Close'>X</button>
@@ -22,8 +22,8 @@ btnEdit.forEach(btn => {
           <input type="text" id="name" name="name" class="form-control" value="${ name }" required />
         </div>
         <div class="mb-3">
-          <label for="name" class="mb-2">結帳日期</label>
-          <input type="text" id="name" name="name" class="form-control" value="${ date }" required />
+          <label for="date" class="mb-2">結帳日期</label>
+          <input type="number" id="date" name="date" class="form-control" max="31" value="${ date }" required />
         </div>
       </form>
     </div>

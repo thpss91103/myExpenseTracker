@@ -23,6 +23,9 @@ router.post('/accounts', authenticated, userController.createAccount)
 router.post('/accounts/:id/edit', authenticated, userController.editAccount)
 router.delete('/accounts/:id/delete', authenticated, userController.deleteAccount)
 
+router.get('/user/:id', authenticated, userController.userProfile)
+router.put('/user/:id/edit', authenticated, userController.userEdit)
+
 router.get('/', (req, res) => res.redirect('/accounts'))
 router.use('/', generalErrorHandler)
 

@@ -1,0 +1,13 @@
+<div class="row m-4">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body user-card">
+      <h1 class="text-center mt-3">編輯個人資料</h1>
+      <form action="/user/{{id}}/edit?_method=PUT" method="POST">
+        {{> signupTable}}
+        <div class="text-end">
+          <button onclick="window.history.back()" class="btn btn-secondary m-1">Back</button>
+          <button type="submit" class="btn btn-info m-1">Save</button>
+        </div>
+      </form>
+  </div>
+</div>

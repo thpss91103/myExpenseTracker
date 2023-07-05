@@ -107,6 +107,59 @@ const userController = {
     } catch (err) {
       next(err)
     }
+  },
+  userProfile: async (req, res, next) => {
+    try {
+      const userId = helpers.getUser(req).id
+
+      const userData = await User.findByPk(userId)
+
+      res.render('user-profile', {
+        id: userId,
+        name: userData.name,
+        email: userData.email
+      })
+    } catch (err) {
+      next(err)
+    }
+  },
+  userEdit: async (req, res, next) => {
+    try {
+      const userId = helpers.getUser(req).id
+      const { name, email, password, confirmPassword } = req.body
+      const saltNumber = 10
+
+      const [user, isEmailExist] = await Promise.all([
+        User.findByPk(userId), //isEmailExist找出email有無重複
+        User.findOne({ where: { email: email }})
+      ])
+
+      if (!user) { throw new Error('找不到此用戶！')}
+
+      if (user.email !== email && isEmailExist) {
+        throw new Error('該email已存在！')
+      }
+
+      if(name?.length > 10) throw new Error('名字勿超過10字！')
+
+      if (password !== confirmPassword) throw new Error('密碼不一致!')
+      let hashedPassword = 0
+      if (password) {
+        const salt = bcrypt.genSaltSync(saltNumber)
+        hashedPassword = bcrypt.hashSync(password, salt)
+      }
+
+      await user.update({
+        name: name || user.name,
+        email: email || user.email,
+        password: hashedPassword || user.password
+      })
+
+      req.flash('success_messages', '已更新成功！')
+      return res.redirect('/accounts')
+    } catch (err) {
+      next(err)
+    }
   }
 }
 

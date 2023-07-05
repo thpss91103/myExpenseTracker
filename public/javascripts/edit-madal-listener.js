@@ -15,7 +15,7 @@ btnEdit.forEach(btn => {
             <button type='button' class='border border-0 bg-white' data-bs-dismiss='modal' aria-label='Close'>X</button>
             <span class='ms-4'>編輯帳戶</span>
           </div>
-          <button type='submit' class='btn btn-info m-1'>儲存</button>
+          <button type='submit' class='btn btn-primary m-1'>Save</button>
         </div>
         <div class="mb-3">
           <label for="name" class="mb-2">帳戶名稱</label>

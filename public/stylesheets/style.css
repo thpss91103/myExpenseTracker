@@ -1,0 +1,10 @@
+.create-btn{
+  color: #0dcaf0;
+  background-color: white;
+}
+
+.create-btn:hover {
+  color: white;
+  background-color: #0dcaf0;
+  transition: all 0.5s;
+}

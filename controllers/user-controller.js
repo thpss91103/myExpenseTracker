@@ -171,10 +171,10 @@ const userController = {
           nest: true,
           where: { AccountId: accountId },
           include: [ Category ],
-          order: [['updatedAt', 'DESC']]
+          order: [['date', 'DESC']]
         }),
       ])
-      
+
       return res.render('records', {
         records
         

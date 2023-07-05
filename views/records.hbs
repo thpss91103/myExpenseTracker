@@ -9,20 +9,25 @@
       <h1 class="text-center mt-3">紀錄費用</h1>
       {{#if records}}
         {{#each records}}
-          <div class="d-flex">
-            <div class="d-flex w-75">
-              <img src="{{ this.Category.icon}}" alt="" style="width: 40px;">
-              <h6 class="mt-3 ms-2">{{#formattedDate this.updatedAt }}{{/formattedDate}}</h6>
-              <h4 class="mt-2 ms-2">{{ this.name }}</h4>
+          <a href="/record/{{ this.id }}">
+            <div class="d-flex">
+              <div class="d-flex w-75">
+                <img src="{{ this.Category.icon}}" alt="" style="width: 40px;">
+                <h6 class="mt-3 ms-2">{{#formattedDate this.date }}{{/formattedDate}}</h6>
+                <h4 class="mt-2 ms-2">{{ this.name }}</h4>
+              </div>
+              <div class="w-25">
+                <p class="mt-2 text-end">{{ this.amount }}元</p>
+              </div>
             </div>
-            <div class="w-25">
-              <p class="mt-2 text-end">{{ this.amount }}元</p>
-            </div>
-          </div>
+          </a>
         {{/each}}
       {{else}}
       <p class="text-center mt-3">目前尚無紀錄</p>
       {{/if}}
+    </div>
+    <div class="text-end">
+      <button onclick="window.history.back()" class="btn btn-secondary m-1">Back</button>
     </div>
   </div>
 </div>

@@ -18,6 +18,8 @@ router.post(
 )
 router.get('/logout', userController.logout)
 
+router.get('/accounts/:id', authenticated, userController.getAccountRecord)
+
 router.get('/accounts', authenticated, userController.accounts)
 router.post('/accounts', authenticated, userController.createAccount)
 router.post('/accounts/:id/edit', authenticated, userController.editAccount)

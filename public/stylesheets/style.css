@@ -1,4 +1,9 @@
-.create-btn{
+.user-card a {
+  text-decoration: none;
+  color: black;
+}
+
+.create-btn {
   color: #0dcaf0;
   background-color: white;
 }

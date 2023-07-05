@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const { User, Account } = require('../models')
+const { User, Account, Record, Category } = require('../models')
 const helpers = require('../_helpers')
 
 const userController = {
@@ -157,6 +157,28 @@ const userController = {
 
       req.flash('success_messages', '已更新成功！')
       return res.redirect('/accounts')
+    } catch (err) {
+      next(err)
+    }
+  },
+  getAccountRecord: async (req, res, next) => {
+    try {
+      const accountId = req.params.id
+      
+      const [ records ] = await Promise.all([
+        Record.findAll({
+          raw: true,
+          nest: true,
+          where: { AccountId: accountId },
+          include: [ Category ],
+          order: [['updatedAt', 'DESC']]
+        }),
+      ])
+      
+      return res.render('records', {
+        records
+        
+      })
     } catch (err) {
       next(err)
     }

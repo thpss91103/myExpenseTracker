@@ -7,8 +7,8 @@
       {{#if accounts}}
         {{#each accounts}}
           <div class="mt-2 d-flex">
-            <h4>{{ this.name }}</h4>
-            <p class="ms-5 mt-1 text-secondary">結帳日期：{{ this.date }}</p>
+            <a href="/accounts/{{ this.id }}"><h4>{{ this.name }}</h4></a>
+            <a href="/accounts/{{ this.id }}"><p class="ms-5 mt-1 text-secondary">結帳日期：{{ this.date }}</p></a>
             <div class="col text-end">
               <button class='btn btn-success btn-edit' data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{this.id}}" data-name="{{this.name}}" data-date="{{this.date}}">編輯</button>
               <form action="/accounts/{{ this.id }}/delete?_method=DELETE" method="POST" style="display: inline;">

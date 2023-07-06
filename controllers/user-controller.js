@@ -102,7 +102,14 @@ const userController = {
 
       if (!account) { throw new Error('沒有此帳戶') }
 
-      await account.destroy()
+      await Record.destroy({
+        where: { AccountId: accountId }
+      })
+
+      await Account.destroy({
+        where: { id: accountId }
+      })
+
       return res.redirect('/accounts')
     } catch (err) {
       next(err)
@@ -233,6 +240,45 @@ const userController = {
         category: record.CategoryId,
         categories
       })
+    } catch (err) {
+      next(err)
+    }
+  },
+  updateRecord: async (req, res, next) => {
+    try {
+      const recordId = req.params.id
+      const { name, amount, date, category } = req.body
+      const referer = req.headers.referer
+
+      const record = await Record.findByPk(recordId)
+      if ( !record ) throw new Error('沒有此消費紀錄！')
+
+      const accountId = record.AccountId
+
+      await record.update({
+        name: name || record.name,
+        amount: amount || record.amount,
+        date: date || record.date,
+        CategoryId: category || record.CategoryId
+      })
+
+      res.redirect(`/accounts/${accountId}`)
+    } catch (err) {
+      next(err)
+    }
+  },
+  deleteRecord: async (req, res, next) => {
+    try {
+      const recordId = req.params.id
+
+      const record = await Record.findByPk(recordId)
+      if (!record) throw new Error('沒有此消費紀錄！')
+
+      const accountId = record.AccountId
+
+      await record.destroy()
+
+      res.redirect(`/accounts/${accountId}`)
     } catch (err) {
       next(err)
     }

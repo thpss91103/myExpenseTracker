@@ -12,7 +12,7 @@
             <div class="col text-end">
               <button class='btn btn-success btn-edit' data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{this.id}}" data-name="{{this.name}}" data-date="{{this.date}}">編輯</button>
               <form action="/accounts/{{ this.id }}/delete?_method=DELETE" method="POST" style="display: inline;">
-                <button class="btn btn-danger" type="submit" onclick="return confirm(`確定要刪除此帳戶嗎？`)">刪除</button>
+                <button class="btn btn-danger" type="submit" onclick="return confirm(`連此帳戶裡的交易紀錄一起刪掉\n確定要刪除此帳戶嗎？`)">刪除</button>
               </form>
             </div>
           </div>

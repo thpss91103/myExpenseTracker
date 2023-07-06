@@ -165,7 +165,7 @@ const userController = {
     try {
       const accountId = req.params.id
       
-      const [ records ] = await Promise.all([
+      const [ records, categories ] = await Promise.all([
         Record.findAll({
           raw: true,
           nest: true,
@@ -173,12 +173,35 @@ const userController = {
           include: [ Category ],
           order: [['date', 'DESC']]
         }),
+        Category.findAll({
+          raw: true
+        })
       ])
 
       return res.render('records', {
-        records
-        
+        records,
+        categories,
+        accountId
       })
+    } catch (err) {
+      next(err)
+    }
+  },
+  postRecord: async (req, res, next) => {
+    try {
+      const accountId = req.params.id
+      const { name, amount, date, category} = req.body
+      const referer = req.headers.referer
+      
+      await Record.create({
+        name,
+        amount,
+        date,
+        AccountId: accountId,
+        CategoryId: category
+      })
+
+      res.redirect(referer)
     } catch (err) {
       next(err)
     }

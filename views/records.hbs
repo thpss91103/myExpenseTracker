@@ -3,7 +3,9 @@
     <div class="d-flex justify-content-between">
       <button class="mb-1 create-btn border border-2 border-info rounded-circle" data-bs-toggle="modal"
       data-bs-target="#createRecordModal">＋</button>
-      <h4 >總額：{{ total.amount}}元</h4>
+      {{#each totalAmount}}
+        <h4 >總額：{{ this.total_amount }}元</h4>
+      {{/each}}
     </div>
     <div class="card card-body user-card">
       <h1 class="text-center mt-3">紀錄費用</h1>
@@ -27,7 +29,7 @@
       {{/if}}
     </div>
     <div class="text-end">
-      <button onclick="window.history.back()" class="btn btn-secondary m-1">Back</button>
+      <a href="/accounts"><button class="btn btn-secondary m-1">Back</button></a>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const { User, Account, Record, Category } = require('../models')
+const { User, Account, Record, Category, sequelize } = require('../models')
 const helpers = require('../_helpers')
 
 const userController = {
@@ -165,7 +165,7 @@ const userController = {
     try {
       const accountId = req.params.id
       
-      const [ records, categories ] = await Promise.all([
+      const [ records, categories, totalAmount ] = await Promise.all([
         Record.findAll({
           raw: true,
           nest: true,
@@ -175,13 +175,22 @@ const userController = {
         }),
         Category.findAll({
           raw: true
+        }),
+        Record.findAll({
+          attributes: [
+            [sequelize.fn('sum', sequelize.col('amount')), 'total_amount'],
+          ],
+          where: { AccountId: accountId },
+          group: ['Account_id'],
+          raw: true
         })
       ])
-
+      
       return res.render('records', {
         records,
         categories,
-        accountId
+        accountId,
+        totalAmount
       })
     } catch (err) {
       next(err)

@@ -185,7 +185,7 @@ const userController = {
           raw: true
         })
       ])
-      
+
       return res.render('records', {
         records,
         categories,
@@ -211,6 +211,28 @@ const userController = {
       })
 
       res.redirect(referer)
+    } catch (err) {
+      next(err)
+    }
+  },
+  getRecord: async (req, res, next) => {
+    try {
+      const recordId = req.params.id
+      
+      const record = await Record.findByPk(recordId)
+      const categories = await Category.findAll({
+        raw: true
+      })
+      console.log(record.date)
+
+      res.render('record', {
+        id: recordId,
+        name: record.name,
+        amount: record.amount,
+        date: record.date,
+        category: record.CategoryId,
+        categories
+      })
     } catch (err) {
       next(err)
     }

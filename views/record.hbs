@@ -1,0 +1,39 @@
+<div class="row m-4">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body user-card">
+      <h1 class="text-center mt-3">紀錄費用</h1>
+      <form action='/record/{{ id }}' method='POST'>
+        <div class='d-flex justify-content-between m-2'>
+          
+        </div>
+        <div class="mb-3 d-flex justify-content-center">
+          <label for="name" class="mb-2 mt-2">品項</label>
+          <input type="text" id="name" name="name" class="form-control w-75 ms-2" maxlength="10" value="{{ name }}"
+            required />
+        </div>
+        <div class="mb-3 d-flex justify-content-center">
+          <label for="amount" class="mb-2 mt-2">金額</label>
+          <input type="number" id="amount" name="amount" class="form-control w-75 ms-2" value="{{ amount }}" required />
+        </div>
+        <div class="mb-3 d-flex justify-content-center">
+          <label for="date" class="mb-2 mt-2">日期</label>
+          <input type="date" id="date" name="date" class="form-control w-75 ms-2" value="" required />
+        </div>
+        <div class="mb-3 ms-4">
+          <label for="category" class="mb-2 ms-3">類別</label>
+          <select id="category" name="category" class="ms-2" required>
+            <option value="">請選擇類別</option>
+            {{#each categories}}
+            <option value="{{ this.id }}">{{ this.name }}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="text-end">
+          <button class="btn btn-secondary m-1" onclick="window.history.back()">Back</button>
+          <button type='submit' class='btn btn-primary m-1'>新增</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

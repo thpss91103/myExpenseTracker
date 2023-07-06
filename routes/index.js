@@ -25,6 +25,7 @@ router.post('/accounts', authenticated, userController.createAccount)
 router.post('/accounts/:id/edit', authenticated, userController.editAccount)
 router.delete('/accounts/:id/delete', authenticated, userController.deleteAccount)
 
+router.get('/record/:id', authenticated, userController.getRecord)
 router.post('/record/:id', authenticated, userController.postRecord)
 
 router.get('/user/:id', authenticated, userController.userProfile)

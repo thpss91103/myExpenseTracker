@@ -178,6 +178,9 @@ const userController = {
       const currentMonth = currentDate.getMonth() + 1 // 月份從0开始，需要加1
       const currentYear = currentDate.getFullYear()
 
+      const account = await Account.findByPk(accountId)  //先找出結帳日期
+      const accountDate = Number(account.date)
+
       const [ records, categories, totalAmount ] = await Promise.all([
         Record.findAll({
           raw: true,
@@ -186,8 +189,8 @@ const userController = {
             [Op.and]: [
               { date: {
                 [Op.and]: [
-                  { [Op.gte]: new Date(currentYear, currentMonth - 1, 1)},
-                  { [Op.lt]: new Date(currentYear, currentMonth, 1)}
+                  { [Op.gte]: new Date(currentYear, currentMonth - 1, accountDate + 1)},
+                  { [Op.lt]: new Date(currentYear, currentMonth, accountDate + 1)}
                 ]
               }
               },
@@ -208,8 +211,8 @@ const userController = {
               {
                 date: {
                   [Op.and]: [
-                    { [Op.gte]: new Date(currentYear, currentMonth - 1, 1) },
-                    { [Op.lt]: new Date(currentYear, currentMonth, 1) }
+                    { [Op.gte]: new Date(currentYear, currentMonth - 1, accountDate + 1) },
+                    { [Op.lt]: new Date(currentYear, currentMonth, accountDate + 1) }
                   ]
                 }
               },
@@ -328,6 +331,9 @@ const userController = {
         targetYear--
       }
 
+      const account = await Account.findByPk(accountId)  //先找出結帳日期
+      const accountDate = Number(account.date)
+
       const [records, categories, totalAmount] = await Promise.all([
         Record.findAll({
           raw: true,
@@ -337,8 +343,8 @@ const userController = {
               {
                 date: {
                   [Op.and]: [
-                    { [Op.gte]: new Date(targetYear, targetMonth - 1, 1) }, //在js月份是從０開始，所以我要７月的資料，７－１＝６，這裡的６實際上是７月
-                    { [Op.lt]: new Date(targetYear, targetMonth, 1) } //所以這裡的７月實際上是８月
+                    { [Op.gte]: new Date(targetYear, targetMonth - 1, accountDate + 1) }, //在js月份是從０開始，所以我要７月的資料，７－１＝６，這裡的６實際上是７月
+                    { [Op.lt]: new Date(targetYear, targetMonth, accountDate + 1) } //所以這裡的７月實際上是８月
                   ]
                 }
               },
@@ -360,8 +366,8 @@ const userController = {
               {
                 date: {
                   [Op.and]: [
-                    { [Op.gte]: new Date(targetYear, targetMonth - 1, 1) },
-                    { [Op.lt]: new Date(targetYear, targetMonth, 1) }
+                    { [Op.gte]: new Date(targetYear, targetMonth - 1, accountDate + 1) },
+                    { [Op.lt]: new Date(targetYear, targetMonth, accountDate + 1) }
                   ]
                 }
               },
@@ -400,6 +406,9 @@ const userController = {
         targetYear++
       }
 
+      const account = await Account.findByPk(accountId)  //先找出結帳日期
+      const accountDate = Number(account.date)
+
       const [records, categories, totalAmount] = await Promise.all([
         Record.findAll({
           raw: true,
@@ -409,8 +418,8 @@ const userController = {
               {
                 date: {
                   [Op.and]: [
-                    { [Op.gte]: new Date(targetYear, targetMonth - 1, 1) },
-                    { [Op.lt]: new Date(targetYear, targetMonth, 1) }
+                    { [Op.gte]: new Date(targetYear, targetMonth - 1, accountDate + 1) },
+                    { [Op.lt]: new Date(targetYear, targetMonth, accountDate + 1) }
                   ]
                 }
               },
@@ -432,8 +441,8 @@ const userController = {
               {
                 date: {
                   [Op.and]: [
-                    { [Op.gte]: new Date(targetYear, targetMonth - 1, 1) },
-                    { [Op.lt]: new Date(targetYear, targetMonth, 1) }
+                    { [Op.gte]: new Date(targetYear, targetMonth - 1, accountDate + 1) },
+                    { [Op.lt]: new Date(targetYear, targetMonth, accountDate + 1) }
                   ]
                 }
               },

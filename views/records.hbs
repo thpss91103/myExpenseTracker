@@ -4,9 +4,13 @@
       <button class="mb-1 create-btn border border-2 border-info rounded-circle" data-bs-toggle="modal"
       data-bs-target="#createRecordModal">＋</button>
       <h4>總額：
-        {{#each totalAmount}}
-          {{ this.total_amount }}
-        {{/each}}
+        {{#if totalAmount}}
+          {{#each totalAmount}}
+            {{ this.total_amount }}
+          {{/each}}
+        {{else}}
+          0
+        {{/if}}
       元</h4>
     </div>
     <div class="card card-body user-card">

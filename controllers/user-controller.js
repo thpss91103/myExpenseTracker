@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 const { User, Account, Record, Category, sequelize } = require('../models')
 const helpers = require('../_helpers')
+const { Op } = require('sequelize')
 
 const userController = {
   signup: async (req, res, next) => {
@@ -181,7 +182,17 @@ const userController = {
         Record.findAll({
           raw: true,
           nest: true,
-          where: { AccountId: accountId },
+          where: { 
+            [Op.and]: [
+              { date: {
+                [Op.and]: [
+                  { [Op.gte]: new Date(currentYear, currentMonth - 1, 1)},
+                  { [Op.lt]: new Date(currentYear, currentMonth, 1)}
+                ]
+              }
+              },
+              { AccountId: accountId }
+            ]},
           include: [ Category ],
           order: [['date', 'DESC']]
         }),
@@ -192,7 +203,19 @@ const userController = {
           attributes: [
             [sequelize.fn('sum', sequelize.col('amount')), 'total_amount'],
           ],
-          where: { AccountId: accountId },
+          where: {
+            [Op.and]: [
+              {
+                date: {
+                  [Op.and]: [
+                    { [Op.gte]: new Date(currentYear, currentMonth - 1, 1) },
+                    { [Op.lt]: new Date(currentYear, currentMonth, 1) }
+                  ]
+                }
+              },
+              { AccountId: accountId }
+            ]
+          },
           group: ['Account_id'],
           raw: true
         })
@@ -305,10 +328,58 @@ const userController = {
         targetYear--
       }
 
+      const [records, categories, totalAmount] = await Promise.all([
+        Record.findAll({
+          raw: true,
+          nest: true,
+          where: {
+            [Op.and]: [
+              {
+                date: {
+                  [Op.and]: [
+                    { [Op.gte]: new Date(targetYear, targetMonth - 1, 1) },
+                    { [Op.lt]: new Date(targetYear, targetMonth, 1) }
+                  ]
+                }
+              },
+              { AccountId: accountId }
+            ]
+          },
+          include: [Category],
+          order: [['date', 'DESC']]
+        }),
+        Category.findAll({
+          raw: true
+        }),
+        Record.findAll({
+          attributes: [
+            [sequelize.fn('sum', sequelize.col('amount')), 'total_amount'],
+          ],
+          where: {
+            [Op.and]: [
+              {
+                date: {
+                  [Op.and]: [
+                    { [Op.gte]: new Date(targetYear, targetMonth - 1, 1) },
+                    { [Op.lt]: new Date(targetYear, targetMonth, 1) }
+                  ]
+                }
+              },
+              { AccountId: accountId }
+            ]
+          },
+          group: ['Account_id'],
+          raw: true
+        })
+      ])
+
       res.render('records', {
         month: targetMonth,
         year: targetYear,
-        accountId
+        accountId,
+        records,
+        categories,
+        totalAmount
       })
     } catch (err) {
       next(err)
@@ -329,10 +400,58 @@ const userController = {
         targetYear++
       }
 
+      const [records, categories, totalAmount] = await Promise.all([
+        Record.findAll({
+          raw: true,
+          nest: true,
+          where: {
+            [Op.and]: [
+              {
+                date: {
+                  [Op.and]: [
+                    { [Op.gte]: new Date(targetYear, targetMonth - 1, 1) },
+                    { [Op.lt]: new Date(targetYear, targetMonth, 1) }
+                  ]
+                }
+              },
+              { AccountId: accountId }
+            ]
+          },
+          include: [Category],
+          order: [['date', 'DESC']]
+        }),
+        Category.findAll({
+          raw: true
+        }),
+        Record.findAll({
+          attributes: [
+            [sequelize.fn('sum', sequelize.col('amount')), 'total_amount'],
+          ],
+          where: {
+            [Op.and]: [
+              {
+                date: {
+                  [Op.and]: [
+                    { [Op.gte]: new Date(targetYear, targetMonth - 1, 1) },
+                    { [Op.lt]: new Date(targetYear, targetMonth, 1) }
+                  ]
+                }
+              },
+              { AccountId: accountId }
+            ]
+          },
+          group: ['Account_id'],
+          raw: true
+        })
+      ])
+
       res.render('records', {
         month: targetMonth,
         year: targetYear,
-        accountId
+        accountId,
+        records,
+        categories,
+        totalAmount
       })
     } catch (err) {
       next(err)

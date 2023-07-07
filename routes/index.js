@@ -19,6 +19,8 @@ router.post(
 router.get('/logout', userController.logout)
 
 router.get('/accounts/:id', authenticated, userController.getAccountRecord)
+router.get('/accounts/:id/prevMonth', authenticated, userController.getPrevMonth)
+router.get('/accounts/:id/nextMonth', authenticated, userController.getNextMonth)
 
 router.get('/accounts', authenticated, userController.accounts)
 router.post('/accounts', authenticated, userController.createAccount)

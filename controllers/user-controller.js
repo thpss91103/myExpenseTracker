@@ -102,6 +102,7 @@ const userController = {
 
       if (!account) { throw new Error('沒有此帳戶') }
 
+      //要連此帳戶的紀錄一起刪
       await Record.destroy({
         where: { AccountId: accountId }
       })
@@ -171,7 +172,11 @@ const userController = {
   getAccountRecord: async (req, res, next) => {
     try {
       const accountId = req.params.id
+      const currentDate = new Date()
       
+      const currentMonth = currentDate.getMonth() + 1 // 月份從0开始，需要加1
+      const currentYear = currentDate.getFullYear()
+
       const [ records, categories, totalAmount ] = await Promise.all([
         Record.findAll({
           raw: true,
@@ -197,7 +202,9 @@ const userController = {
         records,
         categories,
         accountId,
-        totalAmount
+        totalAmount,
+        month: currentMonth,
+        year: currentYear
       })
     } catch (err) {
       next(err)
@@ -279,6 +286,54 @@ const userController = {
       await record.destroy()
 
       res.redirect(`/accounts/${accountId}`)
+    } catch (err) {
+      next(err)
+    }
+  },
+  getPrevMonth: async (req, res, next) => {
+    try {
+      const { month, year } = req.query
+      const accountId = req.params.id
+      
+      let targetMonth = 0 
+      let targetYear = 0
+
+      targetMonth = Number(month) - 1
+      targetYear = Number(year)
+      if (targetMonth === 0) {
+        targetMonth = 12
+        targetYear--
+      }
+
+      res.render('records', {
+        month: targetMonth,
+        year: targetYear,
+        accountId
+      })
+    } catch (err) {
+      next(err)
+    }
+  },
+  getNextMonth: async (req, res, next) => {
+    try {
+      const { month, year } = req.query
+      const accountId = req.params.id
+
+      let targetMonth = 0
+      let targetYear = 0
+
+      targetMonth = Number(month) + 1
+      targetYear = Number(year)
+      if (targetMonth === 13) {
+        targetMonth = 1
+        targetYear++
+      }
+
+      res.render('records', {
+        month: targetMonth,
+        year: targetYear,
+        accountId
+      })
     } catch (err) {
       next(err)
     }

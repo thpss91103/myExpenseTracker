@@ -11,19 +11,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       icon: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       created_at: {
-        allowNull: false,
         type: Sequelize.DATE
       },
       updated_at: {
-        allowNull: false,
         type: Sequelize.DATE
       }
     })

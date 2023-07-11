@@ -11,23 +11,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       amount: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       date: {
-        allowNull: false,
         type: Sequelize.DATE
       },
       created_at: {
-        allowNull: false,
         type: Sequelize.DATE
       },
       updated_at: {
-        allowNull: false,
         type: Sequelize.DATE
       },
       Account_id: {

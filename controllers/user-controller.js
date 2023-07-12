@@ -119,9 +119,13 @@ const userController = {
   },
   userProfile: async (req, res, next) => {
     try {
-      const userId = helpers.getUser(req).id
-
+      const userId = req.params.id 
+      // 檢查是否為本人
+      if (Number(userId) !== helpers.getUser(req).id) {
+        throw new Error('找不到此用戶！')
+      }
       const userData = await User.findByPk(userId)
+      if (!userData) throw new Error('找不到此用戶！')
 
       res.render('user-profile', {
         id: userId,

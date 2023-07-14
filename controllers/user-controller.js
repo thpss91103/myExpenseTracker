@@ -70,6 +70,10 @@ const userController = {
     try {
       const userId = helpers.getUser(req).id
       const { name, date } = req.body
+
+      if (name.length > 10) throw new Error('帳戶名稱不可超過10字')
+      if (date > 31) throw new Error('日期不可超過31')
+
       await Account.create({ name, date, UserId: userId })
       return res.redirect('/accounts')
     } catch (err) {
@@ -83,6 +87,8 @@ const userController = {
 
       const account = await Account.findByPk(accountId)
 
+      if (name.length > 10) throw new Error('帳戶名稱不可超過10字')
+      if (date > 31) throw new Error('日期不可超過31')
       if(!account) { throw new Error('沒有此帳戶')}
 
       await account.update({
@@ -127,7 +133,7 @@ const userController = {
       const userData = await User.findByPk(userId)
       if (!userData) throw new Error('找不到此用戶！')
 
-      res.render('user-profile', {
+      return res.render('user-profile', {
         id: userId,
         name: userData.name,
         email: userData.email

@@ -125,10 +125,12 @@ const userController = {
   },
   userProfile: async (req, res, next) => {
     try {
-      const userId = req.params.id 
+      const UserId = helpers.getUser(req).id
+      const userId = req.params.id //網址輸入的id
       // 檢查是否為本人
       if (Number(userId) !== helpers.getUser(req).id) {
-        throw new Error('找不到此用戶！')
+        req.flash('error_messages', '找不到此用戶！')
+        return res.redirect(`/user/${UserId}`)
       }
       const userData = await User.findByPk(userId)
       if (!userData) throw new Error('找不到此用戶！')
@@ -252,6 +254,8 @@ const userController = {
       const { name, amount, date, category} = req.body
       const referer = req.headers.referer
       
+      if (name.length > 10) throw new Error('費用名稱不可超過10字')
+
       await Record.create({
         name,
         amount,
@@ -273,7 +277,6 @@ const userController = {
       const categories = await Category.findAll({
         raw: true
       })
-      console.log(record.date)
 
       res.render('record', {
         id: recordId,
@@ -291,8 +294,8 @@ const userController = {
     try {
       const recordId = req.params.id
       const { name, amount, date, category } = req.body
-      const referer = req.headers.referer
 
+      if (name.length > 10) throw new Error('費用名稱不可超過10字')
       const record = await Record.findByPk(recordId)
       if ( !record ) throw new Error('沒有此消費紀錄！')
 

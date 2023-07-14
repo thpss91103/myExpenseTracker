@@ -137,7 +137,7 @@ describe('# account request', () => {
         await db.User.create({})
       })
 
-      it('name inter more than 10 chart', done => {
+      it('name input more than 10 chart', done => {
         request(app)
           .post('/accounts')
           .send('name=01234567890')
@@ -158,7 +158,7 @@ describe('# account request', () => {
         })
       })
 
-      it('date inter more than 31', done => {
+      it('date input more than 31', done => {
         request(app)
           .post('/accounts')
           .send('name=account&date=33')
@@ -222,7 +222,7 @@ describe('# account request', () => {
           })
       })
 
-      it('name inter more than 10 chart', done => {
+      it('name input more than 10 chart', done => {
         request(app)
           .post('/accounts/1/edit')
           .send('name=01234567890')
@@ -238,7 +238,7 @@ describe('# account request', () => {
           })
       })
 
-      it('date inter more than 31', done => {
+      it('date input more than 31', done => {
         request(app)
           .post('/accounts/1/edit')
           .send('date=33')

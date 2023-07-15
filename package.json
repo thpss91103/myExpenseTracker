@@ -6,7 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=development node app.js",
     "dev": "nodemon app.js",
-    "test": "mocha test --exit --recursive --timeout 5000"
+    "test": "mocha test --exit --recursive --timeout 5000",
+    "cover": "./node_modules/nyc/bin/nyc.js mocha test/requests --recursive --exit"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,7 @@
     "mocha": "^10.2.0",
     "mysql2": "^1.6.4",
     "nodemon": "^2.0.22",
+    "nyc": "^15.1.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "proxyquire": "^2.1.3",

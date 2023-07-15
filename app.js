@@ -13,7 +13,7 @@ const session = require('express-session')
 const passport = require('./config/passport')
 const helpers = require('./_helpers')
 const app = express()
-const PORT = process.env.PORT || 443
+const PORT = process.env.PORT || 3000
 const SESSION_SECRET = process.env.SESSION_SECRET || 'ThisIsMySecret'
 
 app.engine('hbs', handlebars({ defaultLayout: 'main', extname: '.hbs', helpers: handlebarsHelpers }))

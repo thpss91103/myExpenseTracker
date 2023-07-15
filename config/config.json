@@ -8,7 +8,7 @@
   },
   "test": {
     "username": "travis",
-    "database": "my_expense_tracker",
+    "database": "my_expense_tracker_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

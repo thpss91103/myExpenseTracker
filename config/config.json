@@ -7,9 +7,8 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
+    "username": "travis",
+    "database": "my_expense_tracker",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

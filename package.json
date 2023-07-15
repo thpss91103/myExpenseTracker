@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=development node app.js",
+    "start": "NODE_ENV=production node app.js",
     "dev": "nodemon app.js",
     "test": "mocha test --exit --recursive --timeout 5000",
     "cover": "./node_modules/nyc/bin/nyc.js mocha test/requests --recursive --exit"

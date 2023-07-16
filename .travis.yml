@@ -21,10 +21,7 @@ before_script:
 deploy:
   provider: heroku
   api_key:
-  secure: 17b1e0c6-ac52-416b-979a-02e72695f7b8
+    secure: 17b1e0c6-ac52-416b-979a-02e72695f7b8
   app: myexpense
   on:
     repo: thpss91103/myExpenseTracker
-  branches:
-    only:
-      - main

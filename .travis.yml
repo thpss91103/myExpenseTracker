@@ -23,3 +23,6 @@ deploy:
   app: myexpense
   on:
     repo: thpss91103/myExpenseTracker
+  branches:
+    only:
+      - main

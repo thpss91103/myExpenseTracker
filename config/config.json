@@ -12,7 +12,11 @@
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
-  "production": {
-    "use_env_variable": "CLEARDB_DATABASE_URL"
-  }
+"production": {
+  "username": "bbf4c4cfd84073",
+  "password": "a9eda867",
+  "database": "heroku_6b64db650de2085",
+  "host": "us-cdbr-east-06.cleardb.net",
+  "dialect": "mysql"
+}
 }

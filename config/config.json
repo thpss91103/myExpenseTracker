@@ -13,10 +13,6 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "admin",
-    "password": "Ab850318",
-    "database": "vpc-0319e1f8ce1eb67a2",
-    "host": "172.31.0.0",
-    "dialect": "mysql"
+    "use_env_variable": "CLEARDB_DATABASE_URL"
   }
 }

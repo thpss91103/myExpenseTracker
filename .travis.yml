@@ -19,7 +19,7 @@ before_script:
   - sequelize db:migrate 
 
 deploy:
-provider: heroku
-app: myexpense
-on:
-  repo: thpss91103/myExpenseTracker
+  provider: heroku
+  app: myexpense
+  on:
+    repo: thpss91103/myExpenseTracker

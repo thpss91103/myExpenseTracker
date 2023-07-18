@@ -23,13 +23,17 @@
 - 使用者可以點擊箭頭查詢每隔月總費用
 - 使用者能編輯自己的個人資訊
 
-## **Prerequisites 環境設置**
+## **Tools & Tech 開發工具及技術**
 
-- [VScode](https://code.visualstudio.com/)
-- [Git](https://git-scm.com/downloads)
-- [Node.js](https://nodejs.org/en/)
-- [nodemon](https://www.npmjs.com/package/nodemon)
-- [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
+- VScode
+- Git
+- Node.js
+- nodemon
+- MySQL Workbench
+- bootstrap
+- heroku
+- Travis
+- CI/CD
 
 ## **Installation 開始使用**
 

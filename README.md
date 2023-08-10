@@ -8,7 +8,7 @@
 
 ### 雲端試用
 
-- 試用連結: 
+- 試用連結: https://myexpense-8f3cf0262915.herokuapp.com/signin
 - 前台試用帳密
     - 帳號: user1@example.com
     - 密碼: 123456
